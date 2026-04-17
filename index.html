@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hướng dẫn đăng ký dự thi tốt nghiệp THPT 2026</title>
+  <meta name="description" content="Website hướng dẫn đăng ký trực tuyến dự thi tốt nghiệp THPT 2026 - giao diện hiện đại, đơn giản, hiệu ứng mượt mà." />
+  <style>
+    :root {
+      --bg: #f6f8fc;
+      --bg-2: #ffffff;
+      --text: #16324f;
+      --muted: #5b6b80;
+      --primary: #2563eb;
+      --primary-2: #60a5fa;
+      --accent: #ef4444;
+      --ok: #16a34a;
+      --warn: #f59e0b;
+      --shadow: 0 20px 50px rgba(26, 61, 111, 0.12);
+      --radius: 24px;
+      --glass: rgba(255,255,255,0.74);
+      --border: rgba(37, 99, 235, 0.12);
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(96,165,250,0.22), transparent 28%),
+        radial-gradient(circle at top right, rgba(239,68,68,0.12), transparent 24%),
+        linear-gradient(180deg, #f8fbff 0%, #f3f7fc 100%);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(248, 251, 255, 0.78);
+      border-bottom: 1px solid rgba(37,99,235,0.08);
+    }
+    .nav {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: .2px;
+    }
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--primary), #1d4ed8);
+      color: white;
+      box-shadow: 0 12px 30px rgba(37,99,235,0.28);
+      font-size: 19px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 14px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      transition: .25s ease;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+      background: rgba(37,99,235,0.08);
+    }
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .hero {
+      padding: 48px 0 34px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 26px;
+      align-items: center;
+    }
+    .hero-card, .glass {
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.6);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      border-radius: 30px;
+    }
+    .hero-copy {
+      padding: 42px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-copy::after {
+      content: "";
+      position: absolute;
+      inset: auto -60px -60px auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(96,165,250,0.22), transparent 60%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      background: rgba(37,99,235,0.10);
+      border-radius: 999px;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #2563eb, #e11d48);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .lead {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 60ch;
+      margin-bottom: 28px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 20px;
+      border-radius: 16px;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+      font-weight: 700;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: white;
+      box-shadow: 0 16px 28px rgba(37,99,235,0.26);
+    }
+    .btn-secondary {
+      color: var(--text);
+      background: white;
+      border-color: rgba(37,99,235,0.12);
+    }
+    .hero-preview {
+      padding: 18px;
+      position: relative;
+    }
+    .hero-preview img {
+      width: 100%;
+      display: block;
+      border-radius: 22px;
+      box-shadow: 0 18px 42px rgba(28,52,92,0.14);
+    }
+    .float-card {
+      position: absolute;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 16px 32px rgba(30,64,175,0.15);
+      border-radius: 18px;
+      border: 1px solid rgba(37,99,235,0.08);
+      max-width: 220px;
+    }
+    .float-top { top: 34px; right: -12px; }
+    .float-bottom { bottom: 28px; left: -12px; }
+    .float-card strong { display: block; font-size: 14px; margin-bottom: 4px; }
+    .float-card span { font-size: 13px; color: var(--muted); }
+    section { padding: 34px 0; }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+    .section-head h2 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 3vw, 40px);
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+    }
+    .section-head p { margin: 0; color: var(--muted); max-width: 62ch; }
+    .pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(37,99,235,0.08);
+      color: var(--primary);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .prepare-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .card {
+      background: var(--bg-2);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .prepare-card {
+      padding: 26px;
+      position: relative;
+      min-height: 240px;
+    }
+    .card-num {
+      width: 46px; height: 46px; border-radius: 14px;
+      display: grid; place-items: center;
+      background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+      color: #1d4ed8; font-weight: 800; margin-bottom: 16px;
+    }
+    .prepare-card h3 { margin: 0 0 10px; font-size: 22px; }
+    .prepare-card p { margin: 0; color: var(--muted); }
+    .prepare-card::after {
+      content: "";
+      position: absolute;
+      inset: auto 18px 18px auto;
+      width: 86px; height: 86px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(37,99,235,0.06), rgba(96,165,250,0.02));
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .step-card {
+      display: grid;
+      grid-template-columns: 100px 1.1fr .95fr;
+      gap: 22px;
+      padding: 22px;
+      align-items: center;
+    }
+    .step-no {
+      width: 76px; height: 76px; border-radius: 24px;
+      display: grid; place-items: center;
+      color: white; font-size: 28px; font-weight: 800;
+      background: linear-gradient(135deg, #1d4ed8, #60a5fa);
+      box-shadow: 0 18px 26px rgba(37,99,235,0.22);
+      justify-self: center;
+    }
+    .step-copy h3 { margin: 0 0 10px; font-size: 25px; }
+    .step-copy p { margin: 0 0 10px; color: var(--muted); }
+    .step-copy ul { margin: 0; padding-left: 18px; color: var(--text); }
+    .step-copy li { margin: 8px 0; }
+    .shot {
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(37,99,235,0.12);
+      box-shadow: 0 18px 36px rgba(26,61,111,0.12);
+      cursor: pointer;
+      position: relative;
+    }
+    .shot img {
+      width: 100%; display: block;
+      transition: transform .55s ease;
+    }
+    .shot:hover img { transform: scale(1.025); }
+    .shot::after {
+      content: "Phóng to";
+      position: absolute; right: 14px; bottom: 14px;
+      padding: 8px 12px; border-radius: 999px;
+      background: rgba(22,50,79,0.78); color: white; font-size: 12px; font-weight: 700;
+    }
+    .tips-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 20px;
+    }
+    .list-card { padding: 26px; }
+    .list-card h3 { margin-top: 0; font-size: 24px; }
+    .tip-list { display: grid; gap: 14px; }
+    .tip-item {
+      display: grid; grid-template-columns: 42px 1fr; gap: 14px; align-items: start;
+      padding: 16px; border-radius: 18px; background: #f8fbff; border: 1px solid rgba(37,99,235,0.08);
+    }
+    .tip-icon {
+      width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center; font-size: 20px; font-weight: 700;
+      background: rgba(37,99,235,0.10); color: var(--primary);
+    }
+    .tip-item strong { display: block; margin-bottom: 4px; }
+    .tip-item span { color: var(--muted); }
+    .warning-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+    }
+    .warning-card { padding: 24px; }
+    .warning-card .label {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 12px; border-radius: 999px; font-size: 13px; font-weight: 800;
+      margin-bottom: 14px;
+    }
+    .danger .label { background: rgba(239,68,68,0.12); color: #b91c1c; }
+    .caution .label { background: rgba(245,158,11,0.15); color: #b45309; }
+    .success .label { background: rgba(22,163,74,0.12); color: #15803d; }
+    .warning-card h3 { margin: 0 0 10px; font-size: 20px; }
+    .warning-card p, .warning-card li { color: var(--muted); }
+    .warning-card ul { margin: 0; padding-left: 18px; }
+    .gallery {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    }
+    .gallery .shot { border-radius: 20px; }
+    .faq {
+      display: grid; gap: 14px;
+    }
+    details {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 14px 30px rgba(26,61,111,0.08);
+      padding: 0 20px;
+      overflow: hidden;
+    }
+    summary {
+      list-style: none;
+      cursor: pointer;
+      font-weight: 700;
+      padding: 20px 0;
+      position: relative;
+      padding-right: 34px;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: "+";
+      position: absolute; right: 0; top: 14px; font-size: 28px; color: var(--primary);
+    }
+    details[open] summary::after { content: "−"; }
+    details p { margin: 0 0 18px; color: var(--muted); }
+    .final-banner {
+      margin: 18px 0 40px;
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 20px;
+      align-items: center;
+      background: linear-gradient(135deg, #163b74, #1e40af 45%, #2563eb);
+      color: white;
+      border-radius: 30px;
+      box-shadow: 0 24px 50px rgba(29,78,216,0.28);
+      overflow: hidden;
+      position: relative;
+    }
+    .final-banner::before {
+      content: "";
+      position: absolute;
+      width: 280px; height: 280px; border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      right: -60px; top: -80px;
+    }
+    .final-banner h2 { margin: 0 0 12px; font-size: clamp(30px, 4vw, 44px); line-height: 1.08; }
+    .final-banner p { margin: 0; color: rgba(255,255,255,0.86); }
+    .final-banner img { width: 100%; border-radius: 24px; box-shadow: 0 22px 44px rgba(0,0,0,0.18); }
+    footer {
+      padding: 10px 0 42px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 17, 33, 0.82);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 500;
+      padding: 24px;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-inner {
+      max-width: min(1200px, 96vw);
+      max-height: 92vh;
+      position: relative;
+    }
+    .lightbox img {
+      width: 100%;
+      max-height: 92vh;
+      object-fit: contain;
+      border-radius: 20px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.24);
+      background: white;
+    }
+    .lightbox button {
+      position: absolute;
+      top: -10px; right: -10px;
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 0; font-size: 22px; cursor: pointer;
+      background: white; color: var(--text);
+      box-shadow: 0 14px 26px rgba(0,0,0,0.2);
+    }
+    @media (max-width: 980px) {
+      .hero-grid, .tips-grid, .final-banner, .step-card { grid-template-columns: 1fr; }
+      .prepare-grid, .warning-grid, .gallery { grid-template-columns: 1fr 1fr; }
+      .step-card { padding: 20px; }
+      .step-no { justify-self: start; }
+      .float-top, .float-bottom { position: static; margin-top: 12px; max-width: none; }
+      .hero-copy { padding: 32px; }
+    }
+    @media (max-width: 680px) {
+      .nav { align-items: start; flex-direction: column; }
+      .nav-links { width: 100%; justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+      .prepare-grid, .warning-grid, .gallery { grid-template-columns: 1fr; }
+      .section-head { flex-direction: column; align-items: start; }
+      .hero-copy { padding: 24px; }
+      h1 { font-size: 34px; }
+      .lead { font-size: 16px; }
+      .step-card { gap: 16px; }
+      .container { padding: 0 16px; }
+      .final-banner { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <nav class="nav">
+      <div class="brand">
+        <div class="brand-badge">🎓</div>
+        <div>Hướng dẫn đăng ký thi tốt nghiệp THPT 2026</div>
+      </div>
+      <div class="nav-links">
+        <a href="#chuan-bi">Chuẩn bị</a>
+        <a href="#quy-trinh">Quy trình</a>
+        <a href="#luu-y">Lưu ý</a>
+        <a href="#loi-thuong-gap">Lỗi thường gặp</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-card hero-copy reveal">
+            <div class="eyebrow">📘 Dành cho học sinh đăng ký trực tuyến</div>
+                       <p class="lead">Website này hướng dẫn cho học sinh trường THPT Trần Đại Nghĩa, Đắk Lắk. Các học sinh trường khác cần tham khảo thông tin về diện ưu tiên, khu vực ưu tiên từ GVCN trường mình.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#quy-trinh">Bắt đầu xem hướng dẫn</a>
+              <a class="btn btn-secondary" href="#loi-thuong-gap">Xem lỗi thường gặp</a>
+            </div>
+          </div>
+          <div class="hero-card hero-preview reveal">
+            <img src="assets/slide-1.png" alt="Trang mở đầu hướng dẫn đăng ký dự thi tốt nghiệp THPT 2026" />
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="chuan-bi">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Chuẩn bị trước khi đăng ký</h2>
+            <p>Hãy chuẩn bị đủ hồ sơ và thông tin cơ bản trước khi vào hệ thống để quá trình nhập liệu nhanh hơn, hạn chế sai sót.</p>
+          </div>
+          <div class="pill">Bước mở đầu quan trọng</div>
+        </div>
+        <div class="prepare-grid">
+          <article class="card prepare-card reveal">
+            <div class="card-num">1</div>
+            <h3>Ảnh chân dung 4x6</h3>
+            <p>Chuẩn bị sẵn ảnh chân dung đúng yêu cầu, rõ mặt, nền phù hợp, Không dùng ảnh chụp đời thường hoặc trang phục không phải là đồng phục áo trắng.</p>
+          </article>
+          <article class="card prepare-card reveal">
+            <div class="card-num">2</div>
+            <h3>Ảnh giấy khai sinh</h3>
+            <p>Cần chuẩn bị nếu là học sinh người dân tộc thiểu số và có đăng ký dự thi Đại học.</p>
+          </article>
+          <article class="card prepare-card reveal">
+            <div class="card-num">3</div>
+            <h3>Website đăng ký và thời gian</h3>
+            <p>Truy cập website: <strong>thisinh.thitotnghiepthpt.edu.vn</strong> và thực hiện lần lượt theo hướng dẫn.</p>
+            <p>Đăng kí thử: 17/4-21/4/2026.</p>
+            <p>Đăng kí chính thức: 21/4-05/05/2026.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="quy-trinh">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Quy trình đăng ký theo từng bước</h2>
+            <p>Mỗi bước dưới đây đều có hình minh họa trực tiếp từ file trình chiếu để học sinh dễ đối chiếu khi thao tác trên hệ thống.</p>
+          </div>
+          <div class="pill">Làm lần lượt từ trên xuống</div>
+        </div>
+        <div class="steps">
+          <article class="card step-card reveal">
+            <div class="step-no">01</div>
+            <div class="step-copy">
+              <h3>Tạo và đổi mật khẩu đăng nhập</h3>
+              <p>Đăng nhập trang website: <strong>thisinh.thitotnghiepthpt.edu.vn</strong> và đổi mật khẩu theo đúng quy định.</p>
+              <ul>
+                <li>Mật khẩu phải hợp lệ, ví dụ minh họa trong slide: <strong>Linh@123</strong>.</li>
+                <li>Nhập đầy đủ mật khẩu cũ, mật khẩu mới và xác nhận lại.</li>
+                <li>Nên lưu lại mật khẩu ở nơi an toàn để tránh quên.</li>
+              </ul>
+            </div>
+            <div class="shot" data-full="assets/slide-4.png"><img src="assets/slide-4.png" alt="Minh họa đổi mật khẩu đăng nhập" /></div>
+          </article>
+
+          <article class="card step-card reveal">
+            <div class="step-no">02</div>
+            <div class="step-copy">
+              <h3>Nhập thông tin cá nhân thật chính xác</h3>
+              <p>Đây là phần quan trọng nhất vì ảnh hưởng trực tiếp đến dữ liệu dự thi và đối chiếu hồ sơ.</p>
+              <ul>
+                <li>Kiểm tra kỹ họ tên, giới tính, ngày tháng năm sinh.</li>
+                <li>Tải ảnh chân dung đúng yêu cầu lên hệ thống.</li>
+                <li>Không tự ý nhập sai định dạng tên riêng, dấu câu hoặc thông tin giấy tờ.</li>
+              </ul>
+            </div>
+            <div class="shot" data-full="assets/slide-5.png"><img src="assets/slide-5.png" alt="Minh họa nhập thông tin cá nhân" /></div>
+          </article>
+
+          <article class="card step-card reveal">
+            <div class="step-no">03</div>
+            <div class="step-copy">
+              <h3>Điền địa chỉ và nơi thường trú đúng quy tắc</h3>
+              <p>Phần địa chỉ có nhiều lỗi nhỏ nhưng rất hay xảy ra, nên cần làm cẩn thận.</p>
+              <ul>
+                <li>Chỉ nhập <strong>số nhà, thôn</strong> ở ô ghi chú theo chỉ dẫn.</li>
+                <li>Viết hoa chữ <strong>B</strong> khi cần theo mẫu minh họa.</li>
+                <li>Chọn <strong>Lấy thông tin từ hộ khẩu thường trú</strong> .</li>
+              </ul>
+            </div>
+            <div class="shot" data-full="assets/slide-6.png"><img src="assets/slide-6.png" alt="Minh họa nhập địa chỉ cư trú" /></div>
+          </article>
+
+          <article class="card step-card reveal">
+            <div class="step-no">04</div>
+            <div class="step-copy">
+              <h3>Chọn 2 môn Toán-Văn và 2 môn Tự chọn</h3>
+              <p>Khi khai báo thông tin đăng ký dự thi, cần theo sát hướng dẫn của giáo viên và nội dung trong biểu mẫu.</p>
+              <ul>
+                <li><strong>Không nhập mục 10</strong> theo cảnh báo trong tài liệu.</li>
+                <li>Kiểm tra kỹ môn thi.</li>
+                   </ul>
+            </div>
+            <div class="shot" data-full="assets/slide-7.png"><img src="assets/slide-7.png" alt="Minh họa thông tin đăng ký dự thi" /></div>
+          </article>
+
+          <article class="card step-card reveal">
+            <div class="step-no">05</div>
+            <div class="step-copy">
+              <h3>Đăng kí miễn thi ngoại ngữ nếu có chứng chỉ đảm bảo yêu cầu</h3>
+              <p>Nếu đăng kí miễn thi ngoại ngữ thì không chọn môn Ngoại ngữ ở mục 13 và điền các thông tin ở mục 14.</p>
+              <ul>
+                <li>Chỉ đăng ký miễn thi ngoại ngữ khi thuộc đúng đối tượng.</li>         
+                <li>Không chụp ảnh chứng chỉ sai định dạng hoặc tải nhầm tài liệu.</li>
+              </ul>
+            </div>
+            <div class="shot" data-full="assets/slide-8.png"><img src="assets/slide-8.png" alt="Minh họa đăng ký miễn thi ngoại ngữ" /></div>
+          </article>   
+          
+          <article class="card step-card reveal">
+            <div class="step-no">06</div>
+            <div class="step-copy">
+              <h3>Thông tin xét tốt nghiệp</h3>
+              <p>Các thông tin về xếp loại cuối năm và điểm trung bình phần mềm sẽ tự cập nhật.</p>
+              <ul>
+                <li>Mục 19 chọn <strong>Không</strong>.</li>
+               
+               </ul>
+            </div>
+            <div class="shot" data-full="assets/slide-11.png"><img src="assets/slide-11.png" alt="Minh họa Thông tin xét tốt nghiệp" /></div>
+          </article>  
+          
+          <article class="card step-card reveal">
+            <div class="step-no">07</div>
+            <div class="step-copy">
+              <h3>Thông tin điểm khuyến khích</h3>
+              <p>Học sinh đạt giải <strong>Hội khỏe phù đổng</strong> hoặc <strong>Hội thao GDQP-AN</strong> thì nhập ở mục <strong>Giải khác</strong>.</p>
+              <ul>
+                <li>HS người dân tộc Kinh: <strong>D2-VS2</strong>.</li>
+                <li>HS người dân tộc thiểu số: <strong>D3-TS2</strong>.</li>
+                <li>Cấm điền mục: <strong>25</strong>.</li>
+               
+               </ul>
+            </div>
+            <div class="shot" data-full="assets/slide-12.png"><img src="assets/slide-12.png" alt="Minh họa xét đại học" /></div>
+          </article>   
+          
+          <article class="card step-card reveal">
+            <div class="step-no">08</div>
+            <div class="step-copy">
+              <h3>Thông tin xét tuyển đại học</h3>
+              <p>Học sinh có dự thi xét tuyển đại học thì điền các thông tin này.</p>
+              <ul>
+              <li>HS người dân tộc thiểu số: <strong>01</strong>.</li>
+              <li>Minh chứng: <strong>Ảnh giấy khai sinh</strong>.</li>
+                <li>Khu vực tuyển sinh: <strong>Khu vực 1</strong>.</li>
+                
+               
+               </ul>
+            </div>
+            <div class="shot" data-full="assets/slide-15.png"><img src="assets/slide-15.png" alt="Minh họa điểm khuyến khích" /></div>
+          </article> 
+        
+        </div>
+      </div>
+      
+     
+
+    <section id="loi-thuong-gap">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Lỗi thường gặp cần tránh</h2>
+            <p>Phần này giúp học sinh tránh các lỗi phổ biến xuất hiện trong các năm học trước, đặc biệt ở ảnh thẻ.</p>
+          </div>
+          <div class="pill">Càng kiểm tra kỹ càng đỡ phải sửa</div>
+        </div>
+        <div class="warning-grid">
+          <article class="card warning-card danger reveal">
+            <div class="label">⛔Chụp ảnh</div>
+            <h3>Ảnh không đúng chuẩn ảnh thẻ</h3>
+            <ul>
+              <li>Không được dùng ảnh chụp đời thường thay cho ảnh thẻ.</li>
+<div class="shot reveal" data-full="assets/slide-16.png"><img src="assets/slide-16.png" alt="Minh họa lỗi ảnh không phải ảnh thẻ" /></div>
+            </ul>
+          </article>
+          <article class="card warning-card caution reveal">
+            <div class="label">⚠ Cần cẩn thận</div>
+            <h3>Lỗi hay gặp năm trước</h3>
+            <p>Nhập sai ngày sinh, dân tộc.</p>
+            <p>Chọn mình là thí sinh tự do chưa tốt nghiệp.</p>
+          </article>
+          <article class="card warning-card success reveal">
+            <div class="label">✅ Nên làm</div>
+            <h3>Hỏi giáo viên chủ nhiệm</h3>
+            <p>Nếu gặp mục không chắc chắn hãy hỏi giáo viên chủ nhiệm hoặc thầy Lam.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Câu hỏi nhanh</h2>
+            <p>Một số thắc mắc học sinh thường gặp khi thao tác trên hệ thống đăng ký.</p>
+          </div>
+          <div class="pill">Xem nhanh</div>
+        </div>
+        <div class="faq">
+          <details class="reveal">
+            <summary>Em nên chuẩn bị gì trước khi vào website đăng ký?</summary>
+            <p>Ít nhất cần có ảnh chân dung 4x6, kiểm tra lại thông tin cá nhân và chuẩn bị ảnh giấy khai sinh nếu thuộc trường hợp được nêu trong hướng dẫn.</p>
+          </details>
+          <details class="reveal">
+            <summary>Nếu em không chắc một mục có được nhập hay không thì làm gì?</summary>
+            <p>Không nên tự nhập đoán. Với các mục được đánh dấu cấm nhập hoặc không chọn trong tài liệu, hãy giữ nguyên và hỏi giáo viên chủ nhiệm nếu còn băn khoăn.</p>
+          </details>
+          <details class="reveal">
+            <summary>Phần miễn thi ngoại ngữ có thể chọn tùy ý không?</summary>
+            <p>Không. Chỉ chọn khi em thuộc đúng đối tượng được miễn và có giấy tờ/hồ sơ phù hợp theo hướng dẫn.</p>
+          </details>
+          <details class="reveal">
+            <summary>Ảnh tải lên có cần là ảnh thẻ không?</summary>
+            <p>Có. Không được dùng ảnh không phải ảnh thẻ. Hãy dùng ảnh thẻ 4x6, rõ mặt, nghiêm túc.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="final-banner reveal">
+          <div>
+            <h2>Chúc các em đăng ký chính xác và thi thật tốt</h2>
+            <p>Ai cũng có quyền được ước mơ.</p>
+            <p>Hãy bình tĩnh, kiểm tra kỹ từng mục và hoàn thành việc đăng ký thật cẩn thận trước hạn.</p>
+          </div>
+          <div><img src="assets/slide-17.png" alt="Lời chúc các em thành công" /></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Trường THPT Trần Đại Nghĩa, xã Ea Nuôl, tỉnh Đắk Lắk.
+  </footer>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-inner">
+      <button type="button" id="closeLightbox" aria-label="Đóng">×</button>
+      <img id="lightboxImage" alt="Hình minh họa phóng to" />
+    </div>
+  </div>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const closeLightbox = document.getElementById('closeLightbox');
+    document.querySelectorAll('.shot').forEach(item => {
+      item.addEventListener('click', () => {
+        const src = item.dataset.full || item.querySelector('img')?.src;
+        if (!src) return;
+        lightboxImage.src = src;
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+      });
+    });
+    function closeBox() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lightboxImage.src = '';
+    }
+    closeLightbox.addEventListener('click', closeBox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeBox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeBox();
+    });
+  </script>
+</body>
+</html>
